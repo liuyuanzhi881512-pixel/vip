@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>境外差旅 · 8000VIP服务</title>
+<!--  Inter (英文) + Noto Sans SC (中文) — 高端无衬线字体 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #0a0a0a;
+    --dark:    #141414;
+    --surface: #1a1a1a;
+    --border:  #2a2a2a;
+    --gold:    #d4a853;
+    --gold-l:  #f0d78c;
+    --gold-d:  #a67c2e;
+    --white:   #f5f5f5;
+    --muted:   #888888;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    font-family: 'Inter', 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+  }
+
+  /* ======= 顶部布告栏 ======= */
+  .topbar {
+    background: var(--gold);
+    color: var(--black);
+    text-align: center;
+    padding: 11px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* ======= 主容器 ======= */
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 36px 22px 80px;
+  }
+
+  /* ======= 标题区 ======= */
+  .header {
+    text-align: center;
+    margin-bottom: 44px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header .badge {
+    display: inline-block;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    font-weight: 400;
+  }
+
+  /* ======= 分区大标题 ======= */
+  .section-title {
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 44px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  /* ======= 服务卡片 ======= */
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .service-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 16px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 116px;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+  .service-card:active {
+    background: rgba(212, 168, 83, 0.08);
+  }
+  .service-card.selected {
+    border-color: var(--gold);
+    background: rgba(212, 168, 83, 0.06);
+  }
+  .service-card input[type="checkbox"] {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--gold);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .service-card .icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .service-card .name {
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+    padding-right: 26px;
+  }
+  .service-card .desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-right: 26px;
+    font-weight: 400;
+  }
+
+  .service-full {
+    grid-column: 1 / -1;
+  }
+
+  /* ======= 表单 ======= */
+  .form-group {
+    margin-bottom: 22px;
+  }
+  .form-group label {
+    display: block;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  /* ★ 16px 防止 iOS Safari 自动缩放 */
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 14px 16px;
+    font-size: 16px;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--gold);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .form-group select option {
+    background: var(--dark);
+  }
+  .select-wrap {
+    position: relative;
+  }
+  .select-wrap select {
+    padding-right: 40px;
+    width: 100%;
+  }
+  .select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--muted);
+    pointer-events: none;
+  }
+  .select-wrap.focused::after {
+    border-top-color: var(--gold);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* ======= Radio（是否中转） ======= */
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 6px;
+  }
+  .radio-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+  .radio-btn input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--gold);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+  .radio-btn .radio-text {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .radio-btn.active .radio-text {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ======= 提交按钮 ======= */
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 12px;
+    -webkit-touch-callout: none;
+    user-select: none;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  }
+  .submit-btn:active { background: var(--gold-l); }
+  .submit-btn:hover { background: var(--gold-l); }
+  .submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ======= 底部 ======= */
+  .footer {
+    text-align: center;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-weight: 400;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* ======= Toast ======= */
+  .toast {
+    position: fixed;
+    top: max(24px, env(safe-area-inset-top, 24px));
+    left: 50%;
+    transform: translateX(-50%) translateY(-140px);
+    background: var(--gold);
+    color: var(--black);
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 9999;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    white-space: normal;
+    word-break: break-all;
+    max-width: calc(100vw - 48px);
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ======= 移动端适配 ======= */
+  @media (max-width: 380px) {
+    .container { padding: 24px 14px 60px; }
+    .service-grid { grid-template-columns: 1fr; gap: 10px; }
+    .service-card { min-height: auto; padding: 16px 14px; }
+    .service-card .name { font-size: 14px; }
+    .service-card .desc { font-size: 11px; }
+    .header h1 { font-size: 26px; letter-spacing: 6px; }
+    .section-title { font-size: 16px; letter-spacing: 3px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .form-row .form-group { margin-bottom: 16px; }
+  }
+
+  @media (min-width: 381px) and (max-width: 480px) {
+    .container { padding: 32px 18px 80px; }
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) {
+    .container { padding-top: 16px; }
+    .header { margin-bottom: 24px; padding-bottom: 18px; }
+    .header h1 { font-size: 22px; }
+    .section-title { margin: 24px 0 12px; }
+  }
+
+  ::-webkit-scrollbar { width: 0; }
+</style>
+</head>
+<body>
+
+<div class="topbar">8000 VIP 服务 · 境外差旅装备申请</div>
+
+<div class="container">
+
+  <!-- 标题 -->
+  <div class="header">
+    <div class="badge">VIP Exclusive</div>
+    <h1>境外差旅</h1>
+    <p>选择你需要的装备，填写行程信息，专员将主动联系你</p>
+  </div>
+
+  <!-- 服务选择 -->
+  <div class="section-title">01 · 选择所需服务</div>
+
+  <div class="service-grid">
+    <label class="service-card" ontouchstart="" onclick="toggleCard(this)">
+      <input type="checkbox" value="全球上网卡" onchange="syncCard(this)">
+      <div class="icon">🌐</div>
+      <div class="name">全球上网卡</div>
+      <div class="desc">亿点连接 3.0<br>覆盖 150 个国家/地区</div>
+    </label>
+
+    <label class="service-card" ontouchstart="" onclick="toggleCard(this)">
+      <input type="checkbox" value="全球eSIM卡" onchange="syncCard(this)">
+      <div class="icon">📱</div>
+      <div class="name">全球 eSIM 卡</div>
+      <div class="desc">无需寄送<br>即时开通</div>
+    </label>
+
+    <label class="service-card" ontouchstart="" onclick="toggleCard(this)">
+      <input type="checkbox" value="便携充电宝" onchange="syncCard(this)">
+      <div class="icon">🔋</div>
+      <div class="name">便携充电宝</div>
+      <div class="desc">约 153g 轻量化<br>支持快充</div>
+    </label>
+
+    <label class="service-card" ontouchstart="" onclick="toggleCard(this)">
+      <input type="checkbox" value="便携小排插" onchange="syncCard(this)">
+      <div class="icon">🔌</div>
+      <div class="name">便携小排插</div>
+      <div class="desc">多人出行必备<br>紧凑设计</div>
+    </label>
+
+    <label class="service-card" ontouchstart="" onclick="toggleCard(this)">
+      <input type="checkbox" value="全球转换插" onchange="syncCard(this)">
+      <div class="icon">🌍</div>
+      <div class="name">全球转换插</div>
+      <div class="desc">适配全球插座<br>一体式设计</div>
+    </label>
+
+    <label class="service-card service-full" ontouchstart="" onclick="toggleCard(this)">
+      <input type="checkbox" value="更多差旅需求" onchange="syncCard(this)">
+      <div class="icon">➕</div>
+      <div class="name">更多差旅需求</div>
+      <div class="desc">机场接送 / 当地SIM卡 / 其他定制需求</div>
+    </label>
+  </div>
+
+  <!-- 个人信息 -->
+  <div class="section-title">02 · 个人信息</div>
+
+  <div class="form-group">
+    <label>英文名（RTX） *</label>
+    <input type="text" id="userName" placeholder="如：patfootliu" autocomplete="username">
+  </div>
+
+  <!-- 行程信息 -->
+  <div class="section-title">03 · 行程信息</div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>目的地国家/地区 *</label>
+      <div class="select-wrap">
+        <select id="country" onchange="onCountryChange()">
+          <option value="">请选择国家/地区</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>目的地城市 *</label>
+      <div class="select-wrap">
+        <select id="city" disabled>
+          <option value="">请先选择国家/地区</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>出发日期 *</label>
+      <input type="date" id="startDate">
+    </div>
+    <div class="form-group">
+      <label>返回日期 *</label>
+      <input type="date" id="endDate">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>是否香港机场中转 *</label>
+    <div class="radio-group">
+      <div class="radio-btn" id="radio-yes" onclick="setTransit(true)">
+        <input type="radio" name="transit" value="是">
+        <span class="radio-text">是</span>
+      </div>
+      <div class="radio-btn" id="radio-no" onclick="setTransit(false)">
+        <input type="radio" name="transit" value="否">
+        <span class="radio-text">否</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>备注说明</label>
+    <textarea id="remark" placeholder="设备数量、特殊需求等（选填）"></textarea>
+  </div>
+
+  <!-- 提交 -->
+  <button class="submit-btn" onclick="submitForm()">提 交 申 请</button>
+
+  <div class="footer">
+    8000VIP 服务专线 · 专员将在 2 小时内主动联系您
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ========== 目的地数据（覆盖 150 国，按 iWiki 4012039796 整理）==========
+  const destData = {
+    "日本": ["东京","大阪","京都","名古屋","福冈","札幌","横滨","神户","广岛","仙台"],
+    "韩国": ["首尔","釜山","济州岛","仁川","大邱"],
+    "新加坡": ["新加坡"],
+    "泰国": ["曼谷","清迈","普吉岛","芭提雅","苏梅岛","甲米"],
+    "马来西亚": ["吉隆坡","槟城","新山","亚庇","古晋"],
+    "越南": ["河内","胡志明市","岘港","芽庄","会安"],
+    "印度尼西亚": ["雅加达","巴厘岛","万隆","泗水","美娜多"],
+    "菲律宾": ["马尼拉","宿务","长滩岛","克拉克"],
+    "中国香港": ["香港"],
+    "中国澳门": ["澳门"],
+    "中国台湾": ["台北","新竹","高雄","台中","台南"],
+    "印度": ["班加罗尔","新德里","孟买","海得拉巴","钦奈","普那","加尔各答"],
+    "以色列": ["特拉维夫","耶路撒冷","海法"],
+    "阿联酋": ["迪拜","阿布扎比","沙迦"],
+    "沙特阿拉伯": ["利雅得","吉达","达曼"],
+    "卡塔尔": ["多哈"],
+    "巴基斯坦": ["伊斯兰堡","卡拉奇","拉合尔","白沙瓦"],
+    "孟加拉": ["达卡","吉大港"],
+    "斯里兰卡": ["科伦坡","康提","加勒"],
+    "尼泊尔": ["加德满都","博卡拉"],
+    "柬埔寨": ["金边","暹粒"],
+    "老挝": ["万象","琅勃拉邦"],
+    "哈萨克斯坦": ["阿拉木图","努尔苏丹"],
+    "乌兹别克斯坦": ["塔什干","撒马尔罕"],
+    "蒙古": ["乌兰巴托"],
+    "文莱": ["斯里巴加湾"],
+    "马尔代夫": ["马累"],
+    "巴林": ["麦纳麦"],
+    "科威特": ["科威特城"],
+    "阿曼": ["马斯喀特"],
+    "约旦": ["安曼","亚喀巴"],
+    "亚美尼亚": ["埃里温"],
+    "阿塞拜疆": ["巴库"],
+    "格鲁吉亚": ["第比利斯"],
+    "吉尔吉斯斯坦": ["比什凯克"],
+    "塔吉克斯坦": ["杜尚别"],
+    "英国": ["伦敦","曼彻斯特","爱丁堡","剑桥","牛津","伯明翰","格拉斯哥"],
+    "德国": ["柏林","慕尼黑","法兰克福","汉堡","科隆","斯图加特","杜塞尔多夫"],
+    "法国": ["巴黎","里昂","图卢兹","尼斯","马赛","波尔多"],
+    "意大利": ["米兰","罗马","都灵","佛罗伦萨","威尼斯","博洛尼亚"],
+    "西班牙": ["马德里","巴塞罗那","瓦伦西亚","塞维利亚","毕尔巴鄂"],
+    "荷兰": ["阿姆斯特丹","海牙","鹿特丹","乌得勒支"],
+    "瑞士": ["苏黎世","日内瓦","洛桑","巴塞尔"],
+    "瑞典": ["斯德哥尔摩","哥德堡","马尔默"],
+    "挪威": ["奥斯陆","卑尔根","特隆赫姆"],
+    "丹麦": ["哥本哈根","奥胡斯"],
+    "芬兰": ["赫尔辛基","坦佩雷","图尔库"],
+    "比利时": ["布鲁塞尔","安特卫普"],
+    "奥地利": ["维也纳","萨尔茨堡","因斯布鲁克"],
+    "葡萄牙": ["里斯本","波尔图"],
+    "爱尔兰": ["都柏林","科克"],
+    "波兰": ["华沙","克拉科夫","格但斯克"],
+    "俄罗斯": ["莫斯科","圣彼得堡","新西伯利亚","叶卡捷琳堡"],
+    "土耳其": ["伊斯坦布尔","安卡拉","伊兹密尔"],
+    "捷克": ["布拉格","布尔诺"],
+    "希腊": ["雅典","塞萨洛尼基","圣托里尼"],
+    "冰岛": ["雷克雅未克"],
+    "罗马尼亚": ["布加勒斯特","克卢日"],
+    "匈牙利": ["布达佩斯"],
+    "乌克兰": ["基辅","利沃夫"],
+    "克罗地亚": ["萨格勒布","杜布罗夫尼克"],
+    "斯洛文尼亚": ["卢布尔雅那"],
+    "斯洛伐克": ["布拉迪斯拉发"],
+    "保加利亚": ["索非亚","普罗夫迪夫"],
+    "立陶宛": ["维尔纽斯"],
+    "拉脱维亚": ["里加"],
+    "爱沙尼亚": ["塔林"],
+    "马耳他": ["瓦莱塔"],
+    "塞尔维亚": ["贝尔格莱德","诺维萨德"],
+    "卢森堡": ["卢森堡"],
+    "塞浦路斯": ["尼科西亚"],
+    "阿尔巴尼亚": ["地拉那"],
+    "黑山": ["波德戈里察"],
+    "北马其顿": ["斯科普里"],
+    "波黑": ["萨拉热窝"],
+    "摩尔多瓦": ["基希讷乌"],
+    "摩纳哥": ["摩纳哥"],
+    "列支敦士登": ["瓦杜兹"],
+    "安道尔": ["安道尔城"],
+    "法罗群岛": ["托尔斯港"],
+    "直布罗陀": ["直布罗陀"],
+    "美国": ["硅谷","纽约","西雅图","洛杉矶","波士顿","华盛顿","芝加哥","奥斯汀","圣地亚哥","旧金山","达拉斯","亚特兰大","费城","迈阿密","丹佛","休斯顿"],
+    "加拿大": ["多伦多","温哥华","蒙特利尔","渥太华","卡加利","埃德蒙顿"],
+    "墨西哥": ["墨西哥城","坎昆","瓜达拉哈拉","蒙特雷"],
+    "巴西": ["圣保罗","里约热内卢","巴西利亚","萨尔瓦多"],
+    "阿根廷": ["布宜诺斯艾利斯","科尔多瓦","门多萨"],
+    "智利": ["圣地亚哥","瓦尔帕莱索","蓬塔阿雷纳斯"],
+    "哥伦比亚": ["波哥大","麦德林","卡塔赫纳"],
+    "秘鲁": ["利马","库斯科"],
+    "巴拿马": ["巴拿马城"],
+    "乌拉圭": ["蒙得维的亚"],
+    "厄瓜多尔": ["基多","瓜亚基尔"],
+    "哥斯达黎加": ["圣何塞"],
+    "多米尼加": ["圣多明各","蓬塔卡纳"],
+    "危地马拉": ["危地马拉城"],
+    "尼加拉瓜": ["马那瓜"],
+    "萨尔瓦多": ["圣萨尔瓦多"],
+    "委内瑞拉": ["加拉加斯"],
+    "圭亚那": ["乔治敦"],
+    "玻利维亚": ["拉巴斯","圣克鲁斯"],
+    "苏利南": ["帕拉马里博"],
+    "巴拉圭": ["亚松森"],
+    "澳大利亚": ["悉尼","墨尔本","布里斯班","珀斯","阿德莱德","堪培拉"],
+    "新西兰": ["奥克兰","惠灵顿","基督城","皇后镇"],
+    "斐济": ["苏瓦","楠迪"],
+    "关岛": ["关岛"],
+    "塞班岛": ["塞班岛"],
+    "南非": ["开普敦","约翰内斯堡","德班","比勒陀利亚"],
+    "埃及": ["开罗","亚历山大","卢克索"],
+    "肯尼亚": ["内罗毕","蒙巴萨"],
+    "尼日利亚": ["拉各斯","阿布贾"],
+    "摩洛哥": ["卡萨布兰卡","拉巴特","马拉喀什"],
+    "加纳": ["阿克拉"],
+    "坦桑尼亚": ["达累斯萨拉姆","桑给巴尔"],
+    "突尼斯": ["突尼斯城"],
+    "赞比亚": ["卢萨卡"],
+    "阿尔及利亚": ["阿尔及尔"],
+    "安哥拉": ["罗安达"],
+    "马达加斯加": ["塔那那利佛"],
+    "毛里求斯": ["路易港"],
+    "留尼汪": ["圣但尼"],
+    "乌干达": ["坎帕拉"],
+    "塞内加尔": ["达喀尔"],
+    "塞舌尔": ["维多利亚"]
+  };
+
+  // ========== 初始化国家下拉 ==========
+  (function initDestination() {
+    const countrySelect = document.getElementById('country');
+    const order = [
+      "日本","韩国","新加坡","泰国","马来西亚","越南","印度尼西亚","菲律宾","中国香港","中国澳门","中国台湾",
+      "印度","以色列","阿联酋","沙特阿拉伯","卡塔尔","巴基斯坦","孟加拉","斯里兰卡","尼泊尔","柬埔寨","老挝",
+      "哈萨克斯坦","乌兹别克斯坦","蒙古","文莱","马尔代夫","巴林","科威特","阿曼","约旦",
+      "亚美尼亚","阿塞拜疆","格鲁吉亚","吉尔吉斯斯坦","塔吉克斯坦",
+      "英国","德国","法国","意大利","西班牙","荷兰","瑞士","瑞典","挪威","丹麦","芬兰",
+      "比利时","奥地利","葡萄牙","爱尔兰","波兰","俄罗斯","土耳其","捷克","希腊",
+      "冰岛","罗马尼亚","匈牙利","乌克兰","克罗地亚","斯洛文尼亚","斯洛伐克","保加利亚",
+      "立陶宛","拉脱维亚","爱沙尼亚","马耳他","塞尔维亚","卢森堡","塞浦路斯","阿尔巴尼亚",
+      "黑山","北马其顿","波黑","摩尔多瓦","摩纳哥","列支敦士登","安道尔","法罗群岛","直布罗陀",
+      "美国","加拿大","墨西哥",
+      "巴西","阿根廷","智利","哥伦比亚","秘鲁","巴拿马","乌拉圭","厄瓜多尔","哥斯达黎加",
+      "多米尼加","危地马拉","尼加拉瓜","萨尔瓦多","委内瑞拉","圭亚那","玻利维亚","苏利南","巴拉圭",
+      "澳大利亚","新西兰","斐济","关岛","塞班岛",
+      "南非","埃及","肯尼亚","尼日利亚","摩洛哥","加纳","坦桑尼亚","突尼斯","赞比亚",
+      "阿尔及利亚","安哥拉","马达加斯加","毛里求斯","留尼汪","乌干达","塞内加尔","塞舌尔"
+    ];
+    order.forEach(c => {
+      if (destData[c]) {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        countrySelect.appendChild(opt);
+      }
+    });
+    Object.keys(destData).sort((a,b) => a.localeCompare(b,'zh-CN')).forEach(c => {
+      if (!order.includes(c)) {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        countrySelect.appendChild(opt);
+      }
+    });
+  })();
+
+  // ========== 国家变更 → 填充城市 ==========
+  function onCountryChange() {
+    const countrySelect = document.getElementById('country');
+    const citySelect = document.getElementById('city');
+    citySelect.innerHTML = '';
+    if (!countrySelect.value) {
+      citySelect.disabled = true;
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = '请先选择国家/地区';
+      citySelect.appendChild(opt);
+      return;
+    }
+    citySelect.disabled = false;
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = '请选择城市';
+    citySelect.appendChild(placeholder);
+    (destData[countrySelect.value] || []).forEach(city => {
+      const opt = document.createElement('option');
+      opt.value = city;
+      opt.textContent = city;
+      citySelect.appendChild(opt);
+    });
+  }
+
+  // ========== select 聚焦样式 ==========
+  document.addEventListener('focusin', function(e) {
+    if (e.target.tagName === 'SELECT') {
+      e.target.closest('.select-wrap')?.classList.add('focused');
+    }
+  });
+  document.addEventListener('focusout', function(e) {
+    if (e.target.tagName === 'SELECT') {
+      e.target.closest('.select-wrap')?.classList.remove('focused');
+    }
+  });
+
+  // ========== 中转 Radio 交互 ==========
+  function setTransit(isYes) {
+    const yesBtn = document.getElementById('radio-yes');
+    const noBtn  = document.getElementById('radio-no');
+    if (isYes) {
+      yesBtn.classList.add('active');
+      noBtn.classList.remove('active');
+      yesBtn.querySelector('input').checked = true;
+      noBtn.querySelector('input').checked = false;
+    } else {
+      noBtn.classList.add('active');
+      yesBtn.classList.remove('active');
+      noBtn.querySelector('input').checked = true;
+      yesBtn.querySelector('input').checked = false;
+    }
+  }
+
+  // ========== 卡片选中交互 ==========
+  function toggleCard(label) {
+    const cb = label.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    syncCard(cb);
+  }
+  function syncCard(cb) {
+    cb.closest('.service-card').classList.toggle('selected', cb.checked);
+  }
+
+  // ========== VIP用户 → 专员 RTX 映射表 ==========
+  // 来源：VIP与专员对应关系表.xlsx
+  // 查找逻辑：按用户填写的英文名匹配专员；未匹配则默认 patfootliu
+  const vipSpecialistMap = {
+    'stevenma': 'kirajzhang',
+    'colinyao': 'kirajzhang',
+    'tom': 'patfootliu',
+    'sammi': 'kirajzhang',
+    'annagao': 'kirajzhang',
+    'tingyin': 'kirajzhang',
+    'mmliu': 'meteorwang',
+    'brody': 'chriskcli',
+    'enzozhang': 'kirajzhang',
+    'thomsonji': 'rickiezhong',
+    'sagehuang': 'minghuishi',
+    'marshou': 'meteorwang',
+    'ericma': 'kirajzhang',
+    'gramxu': 'kirajzhang',
+    'mancoyang': 'kirajzhang',
+    'cicyli': 'baozhatang',
+    'lankyzheng': 'meteorwang',
+    'simonwu': 'v_gdyou',
+    'yli': 'v_gdyou',
+    'sophieqiu': 'minghuishi',
+    'frogjing': 'v_gdyou',
+    'cobychiu': 'patfootliu',
+    'paulchen': 'rickiezhong',
+    'xiaochaozhang': 'rickiezhong',
+    'qishengwu': 'awmzhang',
+    'wang': 'v_puxuwu',
+    'minyizhang': 'v_gdyou',
+    'dowsontong': 'patfootliu',
+    'lorainpeng': 'awmzhang',
+    'chamzhong': 'patfootliu',
+    'lincker': 'patfootliu',
+    'bonzhu': 'v_zyunluo',
+    'andyhuang': 'davidliao',
+    'simonzhong': 'eballchen',
+    'zeus': 'davidliao',
+    'leon': 'sunnywang',
+    'leolyliu': 'sunnywang',
+    'vigozhang': 'v_lxtoli',
+    'xuedanzhong': 'v_lxtoli',
+    'tinaykma': 'sunnywang',
+    'thirty': 'sunnywang',
+    'ewellzhao': 'sunnywang',
+    'suman': 'sunnywang',
+    'caitlynchen': 'sunnywang',
+    'jeffhan': 'sunnywang',
+    'helenluan': 'sunnywang',
+    'jonathanhe': 'sunnywang',
+    'allenzhang': 'baozhatang',
+    'tedhuang': 'baozhatang',
+    'harveyzhou': 'baozhatang',
+    'lakezeng': 'baozhatang',
+    'geraldhu': 'baozhatang',
+    'qingweilu': 'baozhatang',
+    'marshzhang': 'baozhatang',
+    'arthuryeung': 'patfootliu',
+    'daniel': 'patfootliu',
+    'jamesm': 'chriskcli',
+    'ls': 'davidliao',
+    'mark': 'kirajzhang',
+    'martinlau': 'chriskcli',
+    'ponyma': 'chriskcli',
+    'johnlo': 'chriskcli',
+    'xidan': 'patfootliu',
+    'charles': 'patfootliu',
+    'tony': 'patfootliu',
+    'bill': 'rickiezhong',
+    'chenjerry': 'kirajzhang',
+    'jacky': 'eballchen',
+    'vincentwang': 'kirajzhang',
+    'susan': 'awmzhang',
+    'freedomli': 'eballchen',
+    'dega': 'eballchen',
+    'haigangma': 'eballchen',
+    'maggiewei': 'patfootliu',
+    'benchoy': 'eballchen',
+    'mklo': 'eballchen',
+    'leoxie': 'eballchen',
+    'xgaxu': 'rickiezhong',
+    'samxu': 'eballchen',
+    'davislin': 'patfootliu',
+    'sabinewu': 'awmzhang',
+    'jasonsi': 'eballchen',
+    'candyshen': 'awmzhang',
+    'lingtang': 'eballchen',
+    'howezheng': 'rickiezhong',
+    'xiaokang': 'baozhatang',
+    'sharondiao': 'eballchen',
+    'yingxiali': 'eballchen',
+    'ericali': 'eballchen',
+    'coolcyang': 'davidliao',
+    'lucazhu': 'awmzhang',
+    'davidyu': 'davidliao',
+    'reganxie': 'davidliao',
+    'irenehuang': 'davidliao',
+    'laurawu': 'rickiezhong',
+    'lala': 'sunnywang',
+    'jeli': 'sunnywang',
+    'hengxiao': 'v_puxuwu',
+    'cchan': 'awmzhang',
+    'dannyseto': 'chriskcli',
+    'deliali': 'eballchen',
+    'wytsang': 'chriskcli',
+    'flin': 'rickiezhong',
+    'ericzheng': 'davidliao',
+    'poshuyeung': 'chriskcli',
+    'danyingma': 'v_lxtoli',
+    'gangs': 'davidliao',
+    'karlxu': 'awmzhang',
+    'polo': 'eballchen',
+    'ethanyu': 'minghuishi',
+    'alyssayang': 'v_dfcao',
+    'songzhou': 'meteorwang',
+    'clau': 'chriskcli',
+    'sharonxhli': 'awmzhang',
+    'alexchen': 'awmzhang',
+    'vernwang': 'sunnywang',
+    'arrowguo': 'eballchen',
+    'richardpu': 'chriskcli',
+    'derekyue': 'v_lxtoli',
+    'sherrygao': 'meteorwang',
+    'loriwu': 'v_puxuwu',
+    'angeltang': 'awmzhang',
+    'brianhsu': 'kirajzhang',
+    'nathanchen': 'kirajzhang',
+    'stephenliu': 'baozhatang',
+    'celia': 'patfootliu',
+    'rani': 'awmzhang',
+    'qinyan': 'patfootliu',
+    'leihuang': 'eballchen',
+    'shiwu': 'v_gdyou',
+    'yaoxia': 'v_lxtoli',
+    'catleung': 'chriskcli',
+    'katychen': 'eballchen',
+    'levinyao': 'v_lxtoli',
+    'leotang': 'eballchen',
+    'konthigali': 'v_dfcao',
+    'carlinshu': 'rickiezhong',
+    'daviddai': 'meteorwang',
+    'rayguo': 'rickiezhong',
+    'kikifan': 'v_gdyou',
+    'tristanye': 'kirajzhang',
+    'samanthamai': 'awmzhang',
+    'xuechaoli': 'v_lxtoli',
+    'robinzyli': 'sunnywang',
+    'cloudliu': 'meteorwang',
+    'winterzhao': 'kirajzhang',
+    'danyihong': 'rickiezhong',
+    'jackfeng': 'eballchen',
+    'bubuqian': 'minghuishi',
+    'snailcai': 'v_yxyxxxiao',
+    'henrysxu': 'v_zyunluo',
+    'haiyangyu': 'v_lxtoli',
+    'ruihao': 'v_lxtoli',
+    'yuyaowang': 'awmzhang',
+    'wiiwang': 'awmzhang',
+    'kittylai': 'meteorwang',
+    'afan': 'kirajzhang',
+    'lionxiao': 'sunnywang',
+    'angusdu': 'baozhatang',
+    'rachelyang': 'eballchen',
+    'fredaxu': 'awmzhang',
+    'shengyzhang': 'awmzhang',
+    'roxwang': 'awmzhang',
+    'sagezou': 'davidliao',
+    'wincoqin': 'rickiezhong',
+    'lollylou': 'davidliao',
+    'diwang': 'sunnywang',
+    'jackda': 'v_puxuwu',
+    'smittqiu': 'v_zyunluo',
+    'cyberchen': 'v_dbosu',
+    'jessieluo': 'v_zyunluo',
+    'eddiechan': 'meteorwang',
+    'royalchen': 'rickiezhong',
+    'yimingxu': 'awmzhang',
+    'ritaliu': 'awmzhang',
+    'fanli': 'eballchen',
+    'zhengyou': 'eballchen',
+    'lavali': 'rickiezhong',
+    'vincentwen': 'baozhatang',
+    'aleeshan': 'minghuishi',
+    'jewelyang': 'meteorwang',
+    'williamsun': 'eballchen',
+    'juliemczhu': 'baozhatang',
+    'cathyychen': 'eballchen',
+    'anderszhou': 'eballchen',
+    'wawaye': 'baozhatang',
+    'willluo': 'kirajzhang',
+    'simonswang': 'eballchen',
+    'kennyluo': 'eballchen',
+    'sallymeilin': 'eballchen',
+    'alexleung': 'chriskcli',
+    'allanliang': 'eballchen',
+    'hatilin': 'v_lxtoli',
+    'odingong': 'awmzhang',
+    'bridgehuang': 'rickiezhong',
+    'burtliu': 'v_puxuwu',
+    'terryli': 'sunnywang',
+    'amycxhuang': 'sunnywang',
+    'jimmiewu': 'kirajzhang',
+    'aimeechen': 'rickiezhong',
+    'kyleryuliu': 'sunnywang',
+    'zbf': 'eballchen',
+    'riverxie': 'meteorwang',
+    'cilightyang': 'kirajzhang',
+    'junoshin': 'meteorwang',
+    'loyolu': 'kirajzhang',
+    'avawu': 'awmzhang',
+    'alexanderng': 'chriskcli',
+    'juneyan': 'awmzhang',
+    'samuelfeng': 'kirajzhang',
+    'abnerchen': 'kirajzhang',
+    'wendyyhuang': 'chriskcli',
+    'wangqi': 'v_puxuwu',
+    'suanfang': 'sunnywang',
+    'andrawdai': 'v_puxuwu',
+    'shawnxiao': 'eballchen',
+    'kinkweng': 'baozhatang',
+    'lylechen': 'baozhatang',
+    'zhefeng': 'rickiezhong',
+    'ehomeliu': 'davidliao',
+    'willyang': 'davidliao',
+    'hytondeng': 'meteorwang',
+    'ivanyeung': 'eballchen',
+    'mikehu': 'eballchen',
+    'yueqili': 'eballchen',
+    'polkalu': 'meteorwang',
+    'wiselywang': 'awmzhang',
+    'wisonlee': 'v_dfcao',
+    'nicoyang': 'baozhatang',
+    'sogu': 'baozhatang',
+    'wqxun': 'minghuishi',
+    'coffeedang': 'meteorwang',
+    'leoyao': 'rickiezhong',
+    'feynmanli': 'sunnywang',
+    'irisli': 'eballchen',
+    'bobbyjin': 'meteorwang',
+    'handsomexu': 'kirajzhang',
+    'kiaixu': 'meteorwang',
+    'tommyli': 'awmzhang',
+    'ivypan': 'eballchen',
+    'kkdong': 'v_puxuwu',
+    'wrenzhang': 'rickiezhong',
+    'tkyu': 'sunnywang',
+    'alanxu': 'rickiezhong',
+    'brantli': 'awmzhang',
+    'saifeishi': 'v_gdyou',
+    'ethenzhang': 'v_lxtoli',
+    'bladedu': 'rickiezhong',
+    'noviahuang': 'sunnywang',
+    'tengfeifang': 'awmzhang',
+    'raymonddai': 'awmzhang',
+    'lenagao': 'kirajzhang',
+    'stevenliang': 'kirajzhang',
+    'rickli': 'kirajzhang',
+    'wawazhou': 'awmzhang',
+    'islandhe': 'awmzhang',
+    'yuezheng': 'minghuishi',
+    'foowang': 'awmzhang',
+    'joanfu': 'eballchen',
+    'ivyzheng': 'meteorwang',
+    'samqiangli': 'patfootliu',
+    'muyuanwang': 'v_lxtoli',
+    'cning': 'v_lxtoli',
+    'chaocui': 'sunnywang',
+    'nicolewang': 'v_dfcao',
+    'hermanzhao': 'meteorwang',
+    'gavinzli': 'v_zyunluo',
+    'hxhaoxu': 'sunnywang',
+    'meishi': 'v_lxtoli',
+    'reneyzhang': 'v_lxtoli',
+    'zhuanglzli': 'v_lxtoli',
+    'lanternlu': 'v_lxtoli',
+    'paterzheng': 'davidliao',
+    'steelchen': 'davidliao',
+    'ablegao': 'davidliao',
+    'alexguo': 'davidliao',
+    'stephenzou': 'davidliao',
+    'jomarlin': 'eballchen',
+    'avivali': 'sunnywang',
+    'daxchen': 'rickiezhong',
+    'littlekenwu': 'v_gdyou',
+    'trackynong': 'meteorwang',
+    'lilliyu': 'eballchen',
+    'vincentren': 'minghuishi',
+    'joriszhang': 'meteorwang',
+    'tianxliu': 'davidliao',
+    'carloshu': 'awmzhang',
+    'shrekyan': 'rickiezhong',
+    'tinajfxu': 'sunnywang',
+    'richazhang': 'awmzhang',
+    'ericsha': 'v_puxuwu',
+    'pyan': 'v_lxtoli',
+    'daniellwang': 'v_lxtoli',
+    'allennlin': 'sunnywang',
+    'skylarkyun': 'sunnywang',
+    'hjs': 'davidliao',
+    'davidkiang': 'chriskcli',
+    'shumenglu': 'chriskcli',
+    'amandagchen': 'chriskcli',
+    'samuelxyang': 'sunnywang',
+    'yachenwang': 'sunnywang',
+    'lilxxu': 'v_lxtoli',
+    'janehou': 'sunnywang',
+    'apolloyuan': 'v_lxtoli',
+    'zhidonzhang': 'v_lxtoli',
+    'meizizhu': 'minghuishi',
+    'rayning': 'rickiezhong',
+    'jimmyrichen': 'awmzhang',
+    'devinghou': 'eballchen',
+    'huayangsong': 'meteorwang',
+    'kenqczhang': 'awmzhang',
+    'crosbyli': 'awmzhang',
+    'cathydiao': 'v_lxtoli',
+    'lenafu': 'eballchen',
+    'simeonshang': 'v_puxuwu',
+    'johndlhe': 'awmzhang',
+    'yizhaoyao': 'awmzhang',
+    'yuyozhang': 'v_dfcao',
+    'greglliu': 'baozhatang',
+    'cassyzu': 'eballchen',
+    'hymanhyhe': 'v_gdyou',
+    'popeyecai': 'awmzhang',
+    'tszshuli': 'chriskcli',
+    'victrjtang': 'v_lxtoli',
+    'yyao': 'v_lxtoli',
+    'rogerxzhang': 'v_lxtoli',
+    'leonleicao': 'v_lxtoli',
+    'qianqwwang': 'v_lxtoli',
+    'daisyanchen': 'awmzhang',
+    'danshu': 'v_gdyou',
+    'jerrickgu': 'eballchen',
+    'belindaliu': 'eballchen',
+    'trancezhang': 'meteorwang',
+    'yangyshen': 'meteorwang',
+    'fabzeng': 'meteorwang',
+    'denielcheng': 'awmzhang',
+    'adamycyang': 'v_lxtoli',
+    'gavincjpang': 'chriskcli',
+    'alisaxiao': 'meteorwang',
+    'mickeyjin': 'eballchen',
+    'kirozhao': 'baozhatang',
+    'annielin': 'baozhatang',
+    'sunnyxu': 'baozhatang',
+    'shadowguo': 'rickiezhong',
+    'victorwan': 'v_puxuwu',
+    'deandjzhu': 'v_lxtoli',
+    'torresxu': 'v_lxtoli',
+    'pengchen': 'davidliao',
+    'richieyang': 'davidliao',
+    'jennizheng': 'v_lxtoli',
+    'davidxu': 'eballchen',
+    'powellli': 'v_puxuwu',
+    'hunterlong': 'sunnywang',
+    'candyyguo': 'awmzhang',
+    'houferchen': 'eballchen',
+    'louisluo': 'v_puxuwu',
+    'shanksyang': 'awmzhang',
+    'vigilyang': 'kirajzhang',
+    'bobsimons': 'sunnywang',
+    'harisonwang': 'sunnywang',
+    'markmowang': 'v_gdyou',
+    'leofluo': 'rickiezhong',
+    'solinqiu': 'eballchen',
+    'richardyu': 'meteorwang',
+    'cindywu': 'eballchen',
+    'lilinwang': 'chriskcli',
+    'chaoteng': 'sunnywang',
+    'batiliu': 'rickiezhong'
+  };
+
+  // 根据申请人 RTX 查找对应专员，未匹配则返回默认专员
+  function getSpecialistRTX(userName) {
+    const rtx = (userName || '').toLowerCase().trim();
+    if (vipSpecialistMap[rtx]) {
+      return vipSpecialistMap[rtx];
+    }
+    return 'patfootliu';
+  }
+
+  // ========== 企微机器人 Webhook ==========
+  const WEBHOOK_URL = 'https://1257899736-cuc4ne0i3f.ap-guangzhou.tencentscf.com';
+
+    // ========== 提交 ==========
+  async function submitForm() {
+    const services = [...document.querySelectorAll('.service-card input:checked')]
+      .map(cb => cb.value);
+    if (services.length === 0) return showToast('请至少选择一项服务');
+
+    const name     = document.getElementById('userName').value.trim();
+    const country  = document.getElementById('country').value;
+    const city     = document.getElementById('city').value;
+    const start    = document.getElementById('startDate').value;
+    const end      = document.getElementById('endDate').value;
+    const transit  = document.querySelector('input[name="transit"]:checked');
+    const remark   = document.getElementById('remark').value.trim();
+
+    if (!name || !country || !city || !start || !end || !transit) {
+      return showToast('请填写所有必填项');
+    }
+
+    const destination = city ? `${country}·${city}` : country;
+    const payload = {
+      name, destination, country, city, start, end,
+      transit: transit.value, remark, services,
+      time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
+    };
+
+    // 根据申请人 RTX 查找对应专员（用于 @ 提醒），未匹配则默认 patfootliu
+    const specialistRTX = getSpecialistRTX(name);
+    const mentionRTX = [specialistRTX];
+    const msg = buildWeComMsg(payload, mentionRTX);
+
+    try {
+      const btn = document.querySelector('.submit-btn');
+      btn.disabled = true;
+      btn.textContent = '提 交 中...';
+
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(msg)
+      });
+      const result = await resp.json();
+
+      if (result.errcode === 0) {
+        showToast('提交成功！专员将尽快联系您');
+        resetForm();
+      } else {
+        showToast('提交失败，请稍后重试（错误码：' + result.errcode + '）');
+        btn.disabled = false;
+        btn.textContent = '提 交 申 请';
+      }
+    } catch (e) {
+      showToast('网络异常，请检查 Webhook 配置');
+      console.error(e);
+      const btn = document.querySelector('.submit-btn');
+      btn.disabled = false;
+      btn.textContent = '提 交 申 请';
+    }
+  }
+
+  // ========== 构建企微消息 ==========
+  function buildWeComMsg(p, mentionList) {
+    const servicesText = p.services.map(s => `• ${s}`).join('\n');
+    const text =
+`【境外差旅服务申请】
+━━━━━━━━━━━━━━
+📦 申请服务：
+${servicesText}
+━━━━━━━━━━━━━━
+👤 申请人：${p.name}
+🌍 目的地：${p.destination}
+📅 行程：${p.start} ～ ${p.end}
+✈️ 香港机场中转：${p.transit}
+📝 备注：${p.remark || '无'}
+━━━━━━━━━━━━━━
+⏰ 申请时间：${p.time}`;
+
+    const msg = {
+      msgtype: 'text',
+      text: {
+        content: text
+      }
+    };
+    // 如果有指定专员，加入 @ 提醒
+    if (mentionList && mentionList.length > 0) {
+      msg.text.mentioned_list = mentionList;
+    }
+    return msg;
+  }
+
+  // ========== 工具函数 ==========
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function resetForm() {
+    document.querySelectorAll('.service-card input').forEach(cb => {
+      cb.checked = false;
+      syncCard(cb);
+    });
+    document.getElementById('userName').value = '';
+    document.getElementById('country').value = '';
+    document.getElementById('city').innerHTML = '<option value="">请先选择国家/地区</option>';
+    document.getElementById('city').disabled = true;
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+    document.querySelectorAll('input[name="transit"]').forEach(r => r.checked = false);
+    document.getElementById('radio-yes').classList.remove('active');
+    document.getElementById('radio-no').classList.remove('active');
+    document.getElementById('remark').value = '';
+    const btn = document.querySelector('.submit-btn');
+    btn.disabled = false;
+    btn.textContent = '提 交 申 请';
+  }
+</script>
+
+</body>
+</html>

@@ -225,44 +225,44 @@
     letter-spacing: 2px;
   }
 
-  /* ======= 服务网格（3列图标）======= */
+  /* ======= 服务网格（2列图标）======= */
   .services-panel {
     background: var(--card-bg);
     border-radius: var(--radius);
-    padding: 20px 12px 18px;
+    padding: 20px 16px 18px;
     margin-bottom: 16px;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
   }
   .service-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
   }
   .svc-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     cursor: pointer;
     -webkit-touch-callout: none;
     user-select: none;
-    padding: 10px 4px 10px;
+    padding: 14px 6px 12px;
     border-radius: var(--radius-sm);
     transition: all .2s;
     position: relative;
   }
   .svc-item:active { transform: scale(0.94); }
   .svc-item .icon-box {
-    width: 52px; height: 52px;
-    border-radius: 14px;
+    width: 60px; height: 60px;
+    border-radius: 16px;
     background: var(--icon-bg);
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
+    font-size: 28px;
     transition: all .25s cubic-bezier(.4,0,.2,1);
   }
   .svc-item .icon-label {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-p);
     text-align: center;
     font-weight: 600;
@@ -277,26 +277,22 @@
     color: var(--gold-d);
   }
   .svc-desc {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-s);
     text-align: center;
-    line-height: 1.5;
-    margin-top: 3px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    transition: color .2s;
-    padding: 0 2px;
+    line-height: 1.6;
+    margin-top: 2px;
+    padding: 0 4px;
+    min-height: 38px;
   }
-  .svc-item.selected .svc-desc { color: var(--gold-d); }
+  .svc-item.selected .svc-desc { color: var(--gold-d); opacity: 0.8; }
   .svc-item input[type="checkbox"] { display: none; }
 
   /* ======= 多目的地 ======= */
   .dest-row {
     background: var(--card-bg-2);
     border-radius: var(--radius-sm);
-    padding: 14px 14px 10px;
+    padding: 14px 14px 12px;
     margin-bottom: 10px;
     border: 1px solid var(--border);
   }
@@ -321,6 +317,7 @@
     transition: background .2s;
   }
   .dest-remove:active { background: rgba(192,80,80,0.1); }
+  .dest-dates { margin-top: 4px; }
 
   .add-dest-btn {
     text-align: center;
@@ -374,7 +371,7 @@
     background: var(--card-bg-2);
     border: 1px solid var(--border);
     color: var(--text-p);
-    padding: 13px 14px;
+    padding: 13px 32px 13px 14px;
     font-size: 15px;
     font-family: inherit;
     outline: none;
@@ -405,7 +402,7 @@
     width: 0; height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-top: 5px solid var(--text-s);
+    border-top: 5.5px solid var(--text-s);
     pointer-events: none;
   }
 
@@ -517,10 +514,10 @@
   /* ======= 响应式 ======= */
   @media (max-width: 380px) {
     .container { padding: 12px 12px 100px; }
-    .service-grid { gap: 10px 4px; }
-    .svc-item .icon-box { width: 44px; height: 44px; font-size: 20px; border-radius: 12px; }
-    .svc-item .icon-label { font-size: 11.5px; }
-    .svc-item .svc-desc { font-size: 10px; line-height: 1.5; -webkit-line-clamp: 3; }
+    .service-grid { gap: 12px 8px; }
+    .svc-item .icon-box { width: 52px; height: 52px; font-size: 24px; border-radius: 14px; }
+    .svc-item .icon-label { font-size: 13px; }
+    .svc-item .svc-desc { font-size: 11px; line-height: 1.6; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
   }
 
@@ -544,19 +541,19 @@
         <input type="checkbox" value="全球上网卡">
         <div class="icon-box">🌐</div>
         <div class="icon-label">全球上网卡</div>
-        <div class="svc-desc">境外出行必备，落地即有网络</div>
+        <div class="svc-desc">境外出行必备 落地即有网络</div>
       </label>
       <label class="svc-item" ontouchstart="" onclick="toggleSvc(this)">
         <input type="checkbox" value="全球eSIM卡">
         <div class="icon-box">📱</div>
         <div class="icon-label">全球eSIM</div>
-        <div class="svc-desc">无需取卡，扫码即装多国通用</div>
+        <div class="svc-desc">无需取卡 扫码即装多国通用</div>
       </label>
       <label class="svc-item" ontouchstart="" onclick="toggleSvc(this)">
         <input type="checkbox" value="便携充电宝">
         <div class="icon-box">🔋</div>
         <div class="icon-label">充电宝</div>
-        <div class="svc-desc">差旅便携，航空合规容量</div>
+        <div class="svc-desc">差旅便携 航空合规容量</div>
       </label>
       <label class="svc-item" ontouchstart="" onclick="toggleSvc(this)">
         <input type="checkbox" value="便携小排插">
@@ -574,7 +571,7 @@
         <input type="checkbox" value="更多差旅需求">
         <div class="icon-box">➕</div>
         <div class="icon-label">更多需求</div>
-        <div class="svc-desc">以上不满足？告诉我们您的需求</div>
+        <div class="svc-desc">以上不满足？将您的需求填写在下方备注说明内</div>
       </label>
     </div>
   </div>
@@ -603,20 +600,21 @@
           <span class="dest-label">目的地 <span class="required">*</span></span>
           <span class="dest-remove" style="visibility:hidden;" onclick="removeDest(0)">✕ 移除</span>
         </div>
-        <div class="form-row">
+        <div class="form-group">
+          <div class="select-wrap">
+            <select class="dest-country" onchange="onCountryChange(this)">
+              <option value="">请选择国家/地区</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row dest-dates">
           <div class="form-group">
-            <div class="select-wrap">
-              <select onchange="onCountryChange(this)">
-                <option value="">请选择国家/地区</option>
-              </select>
-            </div>
+            <label>出发日期<span class="required">*</span></label>
+            <input type="date" class="dest-start">
           </div>
           <div class="form-group">
-            <div class="select-wrap">
-              <select disabled>
-                <option value="">请先选择国家/地区</option>
-              </select>
-            </div>
+            <label>返回日期<span class="required">*</span></label>
+            <input type="date" class="dest-end">
           </div>
         </div>
       </div>
@@ -624,17 +622,6 @@
 
     <div class="add-dest-btn" onclick="addDest()">
       ＋ 添加目的地
-    </div>
-
-    <div class="form-row" style="margin-top:18px;">
-      <div class="form-group">
-        <label>出发日期<span class="required">*</span></label>
-        <input type="date" id="startDate">
-      </div>
-      <div class="form-group">
-        <label>返回日期<span class="required">*</span></label>
-        <input type="date" id="endDate">
-      </div>
     </div>
 
     <div class="form-group">
@@ -833,31 +820,13 @@
 
   // 页面加载时初始化第一个目的地的国家下拉
   (function() {
-    const firstCountrySel = document.querySelector('#dest-list .dest-row select');
+    const firstCountrySel = document.querySelector('#dest-list .dest-row .dest-country');
     if (firstCountrySel) initCountrySelect(firstCountrySel);
   })();
 
-  // ========== 国家变更 → 填充城市 ==========
+  // ========== 国家选择（仅记录，无城市联动）==========
   function onCountryChange(countrySel) {
-    const row = countrySel.closest('.dest-row');
-    const citySel = row.querySelectorAll('select')[1];
-    citySel.innerHTML = '';
-    if (!countrySel.value) {
-      citySel.disabled = true;
-      const opt = document.createElement('option');
-      opt.value = ''; opt.textContent = '请先选择国家/地区';
-      citySel.appendChild(opt);
-      return;
-    }
-    citySel.disabled = false;
-    const placeholder = document.createElement('option');
-    placeholder.value = ''; placeholder.textContent = '请选择城市';
-    citySel.appendChild(placeholder);
-    (destData[countrySel.value] || []).forEach(city => {
-      const opt = document.createElement('option');
-      opt.value = city; opt.textContent = city;
-      citySel.appendChild(opt);
-    });
+    // 选择国家即可，无需城市联动
   }
 
   // ========== 中转 Radio 交互 ==========
@@ -896,26 +865,26 @@
         <span class="dest-label">目的地 <span class="required">*</span></span>
         <span class="dest-remove" onclick="removeDest(${idx})">✕ 移除</span>
       </div>
-      <div class="form-row">
+      <div class="form-group">
+        <div class="select-wrap">
+          <select class="dest-country" onchange="onCountryChange(this)">
+            <option value="">请选择国家/地区</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row dest-dates">
         <div class="form-group">
-          <div class="select-wrap">
-            <select onchange="onCountryChange(this)">
-              <option value="">请选择国家/地区</option>
-            </select>
-          </div>
+          <label>出发日期<span class="required">*</span></label>
+          <input type="date" class="dest-start">
         </div>
         <div class="form-group">
-          <div class="select-wrap">
-            <select disabled>
-              <option value="">请先选择国家/地区</option>
-            </select>
-          </div>
+          <label>返回日期<span class="required">*</span></label>
+          <input type="date" class="dest-end">
         </div>
       </div>`;
     container.appendChild(div);
-    const newCountrySel = div.querySelector('select');
+    const newCountrySel = div.querySelector('.dest-country');
     initCountrySelect(newCountrySel);
-    // 更新第一个行的"移除"按钮可见性
     updateRemoveButtons();
   }
 
@@ -1026,30 +995,36 @@
     if (services.length === 0) return showToast('请至少选择一项服务');
 
     const name  = document.getElementById('userName').value.trim();
-    const start = document.getElementById('startDate').value;
-    const end   = document.getElementById('endDate').value;
     const transit = document.querySelector('input[name="transit"]:checked');
     const remark  = document.getElementById('remark').value.trim();
 
-    // 收集所有目的地
+    // 收集所有目的地（每行：国家 + 出发日期 + 返回日期）
     const destRows = document.querySelectorAll('#dest-list .dest-row');
     const destinations = [];
     let destValid = true;
     destRows.forEach(row => {
-      const selects = row.querySelectorAll('select');
-      const country = selects[0].value;
-      const city    = selects[1].value;
-      if (!country || !city) destValid = false;
-      destinations.push({ country, city });
+      const country = row.querySelector('.dest-country').value;
+      const start   = row.querySelector('.dest-start').value;
+      const end     = row.querySelector('.dest-end').value;
+      if (!country || !start || !end) destValid = false;
+      destinations.push({ country, start, end });
     });
 
-    if (!name || !start || !end || !transit || destinations.length === 0 || !destValid) {
-      return showToast('请填写所有必填项（每个目的地均需选择国家和城市）');
+    if (!name || destinations.length === 0 || !destValid || !transit) {
+      return showToast('请填写所有必填项（每个目的地均需选择国家和起止日期）');
     }
 
-    const destText = destinations.map(d => d.city ? `${d.country}·${d.city}` : d.country).join('；');
+    // 格式化目的地文本
+    const destText = destinations.map(d => `${d.country}（${d.start}～${d.end}）`).join('；');
+    // 全局行程范围
+    const allStarts = destinations.map(d => d.start).sort();
+    const allEnds   = destinations.map(d => d.end).sort();
+    const globalStart = allStarts[0];
+    const globalEnd   = allEnds[allEnds.length - 1];
+
     const payload = {
-      name, destinations, destText, start, end,
+      name, destinations, destText,
+      start: globalStart, end: globalEnd,
       transit: transit.value, remark, services,
       time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
     };
@@ -1124,18 +1099,16 @@ ${servicesText}
     rows.forEach((row, i) => {
       if (i === 0) {
         // 重置第一行
-        const selects = row.querySelectorAll('select');
-        selects[0].value = '';
-        selects[1].innerHTML = '<option value="">请先选择国家/地区</option>';
-        selects[1].disabled = true;
+        const countrySel = row.querySelector('.dest-country');
+        countrySel.value = '';
+        row.querySelector('.dest-start').value = '';
+        row.querySelector('.dest-end').value = '';
       } else {
         row.remove();
       }
     });
     updateRemoveButtons();
 
-    document.getElementById('startDate').value = '';
-    document.getElementById('endDate').value = '';
     document.querySelectorAll('input[name="transit"]').forEach(r => r.checked = false);
     document.getElementById('radio-yes').classList.remove('active');
     document.getElementById('radio-no').classList.remove('active');

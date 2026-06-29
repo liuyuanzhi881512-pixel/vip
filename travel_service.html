@@ -302,6 +302,54 @@
   .svc-item.selected .svc-desc { color: var(--gold-l); }
   .svc-item input[type="checkbox"] { display: none; }
 
+  /* ======= 多目的地 ======= */
+  .dest-row {
+    background: var(--card-bg-2);
+    border-radius: var(--radius-sm);
+    padding: 14px 14px 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+  .dest-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .dest-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-s);
+    letter-spacing: 0.5px;
+  }
+  .dest-remove {
+    font-size: 12px;
+    color: #e06060;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: background .2s;
+  }
+  .dest-remove:active { background: rgba(224,96,96,0.15); }
+
+  .add-dest-btn {
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold);
+    border: 1.5px dashed rgba(212,168,83,0.35);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: all .2s;
+    letter-spacing: 1px;
+  }
+  .add-dest-btn:active {
+    background: var(--gold-glow);
+    border-color: var(--gold);
+  }
+
   /* ======= 表单面板 ======= */
   .form-panel {
     background: var(--card-bg);
@@ -557,26 +605,37 @@
       <h2>行程信息</h2>
     </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>目的地国家<span class="required">*</span></label>
-        <div class="select-wrap">
-          <select id="country" onchange="onCountryChange()">
-            <option value="">请选择国家/地区</option>
-          </select>
+    <!-- 多目的地容器 -->
+    <div id="dest-list">
+      <div class="dest-row" data-idx="0">
+        <div class="dest-row-header">
+          <span class="dest-label">目的地 <span class="required">*</span></span>
+          <span class="dest-remove" style="visibility:hidden;" onclick="removeDest(0)">✕ 移除</span>
         </div>
-      </div>
-      <div class="form-group">
-        <label>目的地城市<span class="required">*</span></label>
-        <div class="select-wrap">
-          <select id="city" disabled>
-            <option value="">请先选择国家/地区</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group">
+            <div class="select-wrap">
+              <select onchange="onCountryChange(this)">
+                <option value="">请选择国家/地区</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="select-wrap">
+              <select disabled>
+                <option value="">请先选择国家/地区</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="form-row">
+    <div class="add-dest-btn" onclick="addDest()">
+      ＋ 添加目的地
+    </div>
+
+    <div class="form-row" style="margin-top:18px;">
       <div class="form-group">
         <label>出发日期<span class="required">*</span></label>
         <input type="date" id="startDate">
@@ -746,9 +805,8 @@
     "塞舌尔": ["维多利亚"]
   };
 
-  // ========== 初始化国家下拉 ==========
-  (function initDestination() {
-    const countrySelect = document.getElementById('country');
+  // ========== 初始化国家下拉（可复用）==========
+  function initCountrySelect(sel) {
     const order = [
       "日本","韩国","新加坡","泰国","马来西亚","越南","印度尼西亚","菲律宾","中国香港","中国澳门","中国台湾",
       "印度","以色列","阿联酋","沙特阿拉伯","卡塔尔","巴基斯坦","孟加拉","斯里兰卡","尼泊尔","柬埔寨","老挝",
@@ -758,10 +816,10 @@
       "比利时","奥地利","葡萄牙","爱尔兰","波兰","俄罗斯","土耳其","捷克","希腊",
       "冰岛","罗马尼亚","匈牙利","乌克兰","克罗地亚","斯洛文尼亚","斯洛伐克","保加利亚",
       "立陶宛","拉脱维亚","爱沙尼亚","马耳他","塞尔维亚","卢森堡","塞浦路斯","阿尔巴尼亚",
-      "黑山","北马其顿","波黑","摩尔多瓦","摩纳哥","列支敦士登","安道尔","法罗群岛","直布罗碑",
+      "黑山","北马其顿","波黑","摩尔多瓦","摩纳哥","列支敦士登","安道尔","法罗群岛","直布罗陀",
       "美国","加拿大","墨西哥",
       "巴西","阿根廷","智利","哥伦比亚","秘鲁","巴拿马","乌拉圭","厄瓜多尔","哥斯达黎加",
-      "多米尼加","危地马拉","尼加拉瓜","萨尔瓦多","委内瑞拉","圭亚那","玻利维亚","苏利南","巴拉圭",
+      "多米尼加","危地马拉","尼加拉瓜","萨尔瓦多","委内瑞拉","圭亚那","玻利维亚","苏里南","巴拉圭",
       "澳大利亚","新西兰","斐济","关岛","塞班岛",
       "南非","埃及","肯尼亚","尼日利亚","摩洛哥","加纳","坦桑尼亚","突尼斯","赞比亚",
       "阿尔及利亚","安哥拉","马达加斯加","毛里求斯","留尼汪","乌干达","塞内加尔","塞舌尔"
@@ -769,44 +827,45 @@
     order.forEach(c => {
       if (destData[c]) {
         const opt = document.createElement('option');
-        opt.value = c;
-        opt.textContent = c;
-        countrySelect.appendChild(opt);
+        opt.value = c; opt.textContent = c;
+        sel.appendChild(opt);
       }
     });
     Object.keys(destData).sort((a,b) => a.localeCompare(b,'zh-CN')).forEach(c => {
       if (!order.includes(c)) {
         const opt = document.createElement('option');
-        opt.value = c;
-        opt.textContent = c;
-        countrySelect.appendChild(opt);
+        opt.value = c; opt.textContent = c;
+        sel.appendChild(opt);
       }
     });
+  }
+
+  // 页面加载时初始化第一个目的地的国家下拉
+  (function() {
+    const firstCountrySel = document.querySelector('#dest-list .dest-row select');
+    if (firstCountrySel) initCountrySelect(firstCountrySel);
   })();
 
   // ========== 国家变更 → 填充城市 ==========
-  function onCountryChange() {
-    const countrySelect = document.getElementById('country');
-    const citySelect = document.getElementById('city');
-    citySelect.innerHTML = '';
-    if (!countrySelect.value) {
-      citySelect.disabled = true;
+  function onCountryChange(countrySel) {
+    const row = countrySel.closest('.dest-row');
+    const citySel = row.querySelectorAll('select')[1];
+    citySel.innerHTML = '';
+    if (!countrySel.value) {
+      citySel.disabled = true;
       const opt = document.createElement('option');
-      opt.value = '';
-      opt.textContent = '请先选择国家/地区';
-      citySelect.appendChild(opt);
+      opt.value = ''; opt.textContent = '请先选择国家/地区';
+      citySel.appendChild(opt);
       return;
     }
-    citySelect.disabled = false;
+    citySel.disabled = false;
     const placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = '请选择城市';
-    citySelect.appendChild(placeholder);
-    (destData[countrySelect.value] || []).forEach(city => {
+    placeholder.value = ''; placeholder.textContent = '请选择城市';
+    citySel.appendChild(placeholder);
+    (destData[countrySel.value] || []).forEach(city => {
       const opt = document.createElement('option');
-      opt.value = city;
-      opt.textContent = city;
-      citySelect.appendChild(opt);
+      opt.value = city; opt.textContent = city;
+      citySel.appendChild(opt);
     });
   }
 
@@ -830,6 +889,58 @@
     const cb = item.querySelector('input[type="checkbox"]');
     cb.checked = !cb.checked;
     item.classList.toggle('selected', cb.checked);
+  }
+
+  // ========== 添加目的地 ==========
+  let destCounter = 0;
+  function addDest() {
+    destCounter++;
+    const idx = destCounter;
+    const container = document.getElementById('dest-list');
+    const div = document.createElement('div');
+    div.className = 'dest-row';
+    div.dataset.idx = idx;
+    div.innerHTML = `
+      <div class="dest-row-header">
+        <span class="dest-label">目的地 <span class="required">*</span></span>
+        <span class="dest-remove" onclick="removeDest(${idx})">✕ 移除</span>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <div class="select-wrap">
+            <select onchange="onCountryChange(this)">
+              <option value="">请选择国家/地区</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="select-wrap">
+            <select disabled>
+              <option value="">请先选择国家/地区</option>
+            </select>
+          </div>
+        </div>
+      </div>`;
+    container.appendChild(div);
+    const newCountrySel = div.querySelector('select');
+    initCountrySelect(newCountrySel);
+    // 更新第一个行的"移除"按钮可见性
+    updateRemoveButtons();
+  }
+
+  function removeDest(idx) {
+    const container = document.getElementById('dest-list');
+    const row = container.querySelector(`.dest-row[data-idx="${idx}"]`);
+    if (row) row.remove();
+    updateRemoveButtons();
+  }
+
+  function updateRemoveButtons() {
+    const rows = document.querySelectorAll('#dest-list .dest-row');
+    rows.forEach((row, i) => {
+      const btn = row.querySelector('.dest-remove');
+      if (btn) btn.style.visibility = rows.length > 1 ? 'visible' : 'hidden';
+    });
   }
 
   // ========== VIP用户 → 专员 RTX 映射表 ==========
@@ -923,20 +1034,31 @@
       .map(cb => cb.value);
     if (services.length === 0) return showToast('请至少选择一项服务');
 
-    const name     = document.getElementById('userName').value.trim();
-    const country  = document.getElementById('country').value;
-    const city     = document.getElementById('city').value;
-    const start    = document.getElementById('startDate').value;
-    const end      = document.getElementById('endDate').value;
-    const transit  = document.querySelector('input[name="transit"]:checked');
-    const remark   = document.getElementById('remark').value.trim();
+    const name  = document.getElementById('userName').value.trim();
+    const start = document.getElementById('startDate').value;
+    const end   = document.getElementById('endDate').value;
+    const transit = document.querySelector('input[name="transit"]:checked');
+    const remark  = document.getElementById('remark').value.trim();
 
-    if (!name || !country || !city || !start || !end || !transit) {
-      return showToast('请填写所有必填项');
+    // 收集所有目的地
+    const destRows = document.querySelectorAll('#dest-list .dest-row');
+    const destinations = [];
+    let destValid = true;
+    destRows.forEach(row => {
+      const selects = row.querySelectorAll('select');
+      const country = selects[0].value;
+      const city    = selects[1].value;
+      if (!country || !city) destValid = false;
+      destinations.push({ country, city });
+    });
+
+    if (!name || !start || !end || !transit || destinations.length === 0 || !destValid) {
+      return showToast('请填写所有必填项（每个目的地均需选择国家和城市）');
     }
 
-    const destination = city ? `${country}·${city}` : country;
-    const payload = { name, destination, country, city, start, end,
+    const destText = destinations.map(d => d.city ? `${d.country}·${d.city}` : d.country).join('；');
+    const payload = {
+      name, destinations, destText, start, end,
       transit: transit.value, remark, services,
       time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
     };
@@ -975,6 +1097,7 @@
 
   function buildWeComMsg(p, mentionList) {
     const servicesText = p.services.map(s => `• ${s}`).join('\n');
+    const destText     = p.destText;
     const text =
 `【境外差旅服务申请】
 ━━━━━━━━━━━━━━
@@ -982,7 +1105,7 @@
 ${servicesText}
 ━━━━━━━━━━━━━━
 👤 申请人：${p.name}
-🌍 目的地：${p.destination}
+🌍 目的地：${destText}
 📅 行程：${p.start} ～ ${p.end}
 ✈️ 香港机场中转：${p.transit}
 📝 备注：${p.remark || '无'}
@@ -1003,9 +1126,23 @@ ${servicesText}
   function resetForm() {
     document.querySelectorAll('.svc-item input').forEach(cb => { cb.checked = false; cb.closest('.svc-item').classList.remove('selected'); });
     document.getElementById('userName').value = '';
-    document.getElementById('country').value = '';
-    document.getElementById('city').innerHTML = '<option value="">请先选择国家/地区</option>';
-    document.getElementById('city').disabled = true;
+
+    // 重置目的地列表：只保留第一行，清空所有行
+    const container = document.getElementById('dest-list');
+    const rows = container.querySelectorAll('.dest-row');
+    rows.forEach((row, i) => {
+      if (i === 0) {
+        // 重置第一行
+        const selects = row.querySelectorAll('select');
+        selects[0].value = '';
+        selects[1].innerHTML = '<option value="">请先选择国家/地区</option>';
+        selects[1].disabled = true;
+      } else {
+        row.remove();
+      }
+    });
+    updateRemoveButtons();
+
     document.getElementById('startDate').value = '';
     document.getElementById('endDate').value = '';
     document.querySelectorAll('input[name="transit"]').forEach(r => r.checked = false);

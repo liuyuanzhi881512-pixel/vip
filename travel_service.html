@@ -19,7 +19,7 @@
     --gold-d:    #b8924a;
     --gold-glow: rgba(212,168,83,0.15);
     --text-p:    #f0ece4;
-    --text-s:    #9a9590;
+    --text-s:    #b8b0a8;
     --accent:    #e8c97a;
     --border:    rgba(255,255,255,0.08);
     --radius:    16px;
@@ -71,7 +71,7 @@
   .container {
     max-width: 480px;
     margin: 0 auto;
-    padding: 16px 16px 100px;
+    padding: 16px 16px 32px;
   }
 
   /* ======= VIP 用户卡片（顶部 Hero）======= */
@@ -287,19 +287,19 @@
     color: var(--gold-l);
   }
   .svc-desc {
-    font-size: 10px;
-    color: #666;
+    font-size: 12px;
+    color: #a8a0a0;
     text-align: center;
-    line-height: 1.35;
-    margin-top: 2px;
+    line-height: 1.5;
+    margin-top: 3px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     transition: color .2s;
     padding: 0 2px;
   }
-  .svc-item.selected .svc-desc { color: #aaa; }
+  .svc-item.selected .svc-desc { color: var(--gold-l); }
   .svc-item input[type="checkbox"] { display: none; }
 
   /* ======= 表单面板 ======= */
@@ -444,8 +444,8 @@
   /* ======= 底部信息 ======= */
   .footer {
     text-align: center;
-    margin-top: 20px;
-    padding-top: 16px;
+    margin-top: 10px;
+    padding-top: 8px;
     font-size: 12px;
     color: #777;
     letter-spacing: 0.5px;
@@ -481,7 +481,7 @@
     .service-grid { gap: 10px 4px; }
     .svc-item .icon-box { width: 44px; height: 44px; font-size: 20px; border-radius: 12px; }
     .svc-item .icon-label { font-size: 11px; }
-    .svc-item .svc-desc { font-size: 9px; }
+    .svc-item .svc-desc { font-size: 11px; line-height: 1.5; -webkit-line-clamp: 3; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
   }
 
@@ -720,7 +720,7 @@
     "委内瑞拉": ["加拉加斯"],
     "圭亚那": ["乔治敦"],
     "玻利维亚": ["拉巴斯","圣克鲁斯"],
-    "苏利南": ["帕拉马里博"],
+    "苏里南": ["帕拉马里博"],
     "巴拉圭": ["亚松森"],
     "澳大利亚": ["悉尼","墨尔本","布里斯班","珀斯","阿德莱德","堪培拉"],
     "新西兰": ["奥克兰","惠灵顿","基督城","皇后镇"],
@@ -758,7 +758,7 @@
       "比利时","奥地利","葡萄牙","爱尔兰","波兰","俄罗斯","土耳其","捷克","希腊",
       "冰岛","罗马尼亚","匈牙利","乌克兰","克罗地亚","斯洛文尼亚","斯洛伐克","保加利亚",
       "立陶宛","拉脱维亚","爱沙尼亚","马耳他","塞尔维亚","卢森堡","塞浦路斯","阿尔巴尼亚",
-      "黑山","北马其顿","波黑","摩尔多瓦","摩纳哥","列支敦士登","安道尔","法罗群岛","直布罗陀",
+      "黑山","北马其顿","波黑","摩尔多瓦","摩纳哥","列支敦士登","安道尔","法罗群岛","直布罗碑",
       "美国","加拿大","墨西哥",
       "巴西","阿根廷","智利","哥伦比亚","秘鲁","巴拿马","乌拉圭","厄瓜多尔","哥斯达黎加",
       "多米尼加","危地马拉","尼加拉瓜","萨尔瓦多","委内瑞拉","圭亚那","玻利维亚","苏利南","巴拉圭",
@@ -1015,154 +1015,6 @@ ${servicesText}
     const btn = document.querySelector('.submit-btn');
     btn.disabled = false;
     btn.textContent = '提 交 申 请';
-  }
-</script>
-</body>
-</html>
-
-  // ========== VIP用户 → 专员 RTX 映射表 ==========
-  const vipSpecialistMap = {
-    'stevenma': 'kirajzhang', 'colinyao': 'kirajzhang', 'tom': 'patfootliu', 'sammi': 'kirajzhang', 'annagao': 'kirajzhang',
-    'tingyin': 'kirajzhang', 'mmliu': 'meteorwang', 'brody': 'chriskcli', 'enzozhang': 'kirajzhang', 'thomsonji': 'rickiezhong',
-    'sagehuang': 'minghuishi', 'marshou': 'meteorwang', 'ericma': 'kirajzhang', 'gramxu': 'kirajzhang', 'mancoyang': 'kirajzhang',
-    'cicyli': 'baozhatang', 'lankyzheng': 'meteorwang', 'simonwu': 'v_gdyou', 'yli': 'v_gdyou', 'sophieqiu': 'minghuishi',
-    'frogjing': 'v_gdyou', 'cobychiu': 'patfootliu', 'paulchen': 'rickiezhong', 'xiaochaozhang': 'rickiezhong', 'qishengwu': 'awmzhang',
-    'wang': 'v_puxuwu', 'minyizhang': 'v_gdyou', 'dowsontong': 'patfootliu', 'lorainpeng': 'awmzhang', 'chamzhong': 'patfootliu',
-    'lincker': 'patfootliu', 'bonzhu': 'v_zyunluo', 'andyhuang': 'davidliao', 'simonzhong': 'eballchen', 'zeus': 'davidliao',
-    'leon': 'sunnywang', 'leolyliu': 'sunnywang', 'vigozhang': 'v_lxtoli', 'xuedanzhong': 'v_lxtoli', 'tinaykma': 'sunnywang',
-    'thirty': 'sunnywang', 'ewellzhao': 'sunnywang', 'suman': 'sunnywang', 'caitlynchen': 'sunnywang', 'jeffhan': 'sunnywang',
-    'helenluan': 'sunnywang', 'jonathanhe': 'sunnywang', 'allenzhang': 'baozhatang', 'tedhuang': 'baozhatang', 'harveyzhou': 'baozhatang',
-    'lakezeng': 'baozhatang', 'geraldhu': 'baozhatang', 'qingweilu': 'baozhatang', 'marshzhang': 'baozhatang', 'arthuryeung': 'patfootliu',
-    'daniel': 'patfootliu', 'jamesm': 'chriskcli', 'ls': 'davidliao', 'mark': 'kirajzhang', 'martinlau': 'chriskcli',
-    'ponyma': 'chriskcli', 'johnlo': 'chriskcli', 'xidan': 'patfootliu', 'charles': 'patfootliu', 'tony': 'patfootliu',
-    'bill': 'rickiezhong', 'chenjerry': 'kirajzhang', 'jacky': 'eballchen', 'vincentwang': 'kirajzhang', 'susan': 'awmzhang',
-    'freedomli': 'eballchen', 'dega': 'eballchen', 'haigangma': 'eballchen', 'maggiewei': 'patfootliu', 'benchoy': 'eballchen',
-    'mklo': 'eballchen', 'leoxie': 'eballchen', 'xgaxu': 'rickiezhong', 'samxu': 'eballchen', 'davislin': 'patfootliu',
-    'sabinewu': 'awmzhang', 'jasonsi': 'eballchen', 'candyshen': 'awmzhang', 'lingtang': 'eballchen', 'howezheng': 'rickiezhong',
-    'xiaokang': 'baozhatang', 'sharondiao': 'eballchen', 'yingxiali': 'eballchen', 'ericali': 'eballchen', 'coolcyang': 'davidliao',
-    'lucazhu': 'awmzhang', 'davidyu': 'davidliao', 'reganxie': 'davidliao', 'irenehuang': 'davidliao', 'laurawu': 'rickiezhong',
-    'lala': 'sunnywang', 'jeli': 'sunnywang', 'hengxiao': 'v_puxuwu', 'cchan': 'awmzhang', 'dannyseto': 'chriskcli',
-    'deliali': 'eballchen', 'wytsang': 'chriskcli', 'flin': 'rickiezhong', 'ericzheng': 'davidliao', 'poshuyeung': 'chriskcli',
-    'danyingma': 'v_lxtoli', 'gangs': 'davidliao', 'karlxu': 'awmzhang', 'polo': 'eballchen', 'ethanyu': 'minghuishi',
-    'alyssayang': 'v_dfcao', 'songzhou': 'meteorwang', 'clau': 'chriskcli', 'sharonxhli': 'awmzhang', 'alexchen': 'awmzhang',
-    'vernwang': 'sunnywang', 'arrowguo': 'eballchen', 'richardpu': 'chriskcli', 'derekyue': 'v_lxtoli', 'sherrygao': 'meteorwang',
-    'loriwu': 'v_puxuwu', 'angeltang': 'awmzhang', 'brianhsu': 'kirajzhang', 'nathanchen': 'kirajzhang', 'stephenliu': 'baozhatang',
-    'celia': 'patfootliu', 'rani': 'awmzhang', 'shiwu': 'v_gdyou',wu': 'v_gdyou', 'yaoxia': 'v_lxtoli', 'catleung': 'chriskcli',
-    'katychen': 'eballchen', 'levinyao': 'v_lxtoli', 'leotang': 'eballchen', 'konthigali': 'v_dfcao', 'carlinshu': 'rickiezhong',
-    'daviddai': 'meteorwang', 'rayguo': 'rickiezhong', 'kikifan': 'v_gdyou', 'tristanye': 'kirajzhang', 'samanthamai': 'awmzhang',
-    'xuechaoli': 'v_lxtoli', 'robinzyli': 'sunnywang', 'cloudliu': 'meteorwang', 'winterzhao': 'kirajzhang', 'danyihong': 'rickiezhong',
-    'jackfeng': 'eballchen', 'bubuqian': 'minghuishi', 'snailcai': 'v_yxyxxxiao', 'henrysxu': 'v_zyunluo', 'haiyangyu': 'v_lxtoli',
-    'ruihao': 'v_lxtoli', 'yuyaowang': 'awmzhang', 'wiiwang': 'awmzhang', 'kittylai': 'meteorwang', 'afan': 'kirajzhang',
-    'lionxiao': 'sunnywang', 'angusdu': 'baozhatang', 'rachelyang': 'eballchen', 'fredaxu': 'awmzhang', 'shengyzhang': 'awmzhang',
-    'roxwang': 'awmzhang', 'sagezou': 'davidliao', 'wincoqin': 'rickiezhong', 'lollylou': 'davidliao', 'diwang': 'sunnywang',
-    'jackda': 'v_puxuwu', 'smittqiu': 'v_zyunluo', 'cyberchen': 'v_dbosu', 'jessieluo': 'v_zyunluo', 'eddiechan': 'meteorwang',
-    'royalchen': 'rickiezhong', 'yimingxu': 'awmzhang', 'ritaliu': 'awmzhang', 'fanli': 'eballchen', 'zhengyou': 'eballchen',
-    'lavali': 'rickiezhong', 'vincentwen': 'baozhatang', 'aleeshan': 'minghuishi', 'jewelyang': 'meteorwang', 'williamsun': 'eballchen',
-    'juliemczhu': 'baozhatang', 'cathyychen': 'eballchen', 'anderszhou': 'eballchen', 'wawaye': 'baozhatang', 'willluo': 'kirajzhang',
-    'simonswang': 'eballchen', 'kennyluo': 'eballchen', 'sallymeilin': 'eballchen', 'alexleung': 'chriskcli', 'allanliang': 'eballchen',
-    'hatilin': 'v_lxtoli', 'odingong': 'awmzhang', 'bridgehuang': 'rickiezhong', 'burtliu': 'v_puxuwu', 'terryli': 'sunnywang',
-    'amycxhuang': 'sunnywang', 'jimmiewu': 'kirajzhang', 'aimeechen': 'rickiezhong', 'kyleryuliu': 'sunnywang', 'zbf': 'eballchen',
-    'riverxie': 'meteorwang', 'cilightyang': 'kirajzhang', 'junoshin': 'meteorwang', 'loyolu': 'kirajzhang', 'avawu': 'awmzhang',
-    'alexanderng': 'chriskcli', 'juneyan': 'awmzhang', 'samuelfeng': 'kirajzhang', 'abnerchen': 'kirajzhang', 'wendyyhuang': 'chriskcli',
-    'wangqi': 'v_puxuwu', 'suanfang': 'sunnywang', 'andrawdai': 'v_puxuwu', 'shawnxiao': 'eballchen', 'kinkweng': 'baozhatang',
-    'lylechen': 'baozhatang', 'zhefeng': 'rickiezhong', 'ehomeliu': 'davidliao', 'willyang': 'davidliao', 'hytondeng': 'meteorwang',
-    'ivanyeung': 'eballchen', 'mikehu': 'eballchen', 'yueqili': 'eballchen', 'polkalu': 'meteorwang', 'wiselywang': 'awmzhang',
-    'wisonlee': 'v_dfcao', 'nicoyang': 'baozhatang', 'sogu': 'baozhatang', 'wqxun': 'minghuishi', 'coffeedang': 'meteorwang',
-    'leoyao': 'rickiezhong', 'feynmanli': 'sunnywang', 'irisli': 'eballchen', 'bobbyjin': 'meteorwang', 'handsomexu': 'kirajzhang',
-    'kiaixu': 'meteorwang', 'tommyli': 'awmzhang', 'ivypan': 'eballchen', 'kkdong': 'v_puxuwu', 'wrenzhang': 'rickiezhong',
-    'tkyu': 'sunnywang', 'alanxu': 'rickiezhong', 'brantli': 'awmzhang', 'saifeishi': 'v_gdyou', 'ethenzhang': 'v_lxtoli',
-    'bladedu': 'rickiezhong', 'noviahuang': 'sunnywang', 'tengfeifang': 'awmzhang', 'raymonddai': 'awmzhang', 'lenagao': 'kirajzhang',
-    'stevenliang': 'kirajzhang', 'rickli': 'kirajzhang', 'wawazhou': 'awmzhang', 'islandhe': 'awmzhang', 'yuezheng': 'minghuishi',
-    'foowang': 'awmzhang', 'joanfu': 'eballchen', 'ivyzheng': 'meteorwang', 'samqiangli': 'patfootliu', 'muyuanwang': 'v_lxtoli',
-    'cning': 'v_lxtoli', 'chaocui': 'sunnywang', 'nicolewang': 'v_dfcao', 'hermanzhao': 'meteorwang', 'gavinzli': 'v_zyunluo',
-    'hxhaoxu': 'sunnywang', 'meishi': 'v_lxtoli', 'reneyzhang': 'v_lxtoli', 'zhuanglzli': 'v_lxtoli', 'lanternlu': 'v_lxtoli',
-    'paterzheng': 'davidliao', 'steelchen': 'davidliao', 'ablegao': 'davidliao', 'alexguo': 'davidliao', 'stephenzou': 'davidliao',
-    'jomarlin': 'eballchen', 'avivali': 'sunnywang', 'daxchen': 'rickiezhong', 'littlekenwu': 'v_gdyou', 'trackynong': 'meteorwang',
-    'lilliyu': 'eballchen', 'vincentren': 'minghuishi', 'joriszhang': 'meteorwang', 'tianxliu': 'davidliao', 'carloshu': 'awmzhang',
-    'shrekyan': 'rickiezhong', 'tinajfxu': 'sunnywang', 'richazhang': 'awmzhang', 'ericsha': 'v_puxuwu', 'pyan': 'v_lxtoli',
-    'daniellwang': 'v_lxtoli', 'allennlin': 'sunnywang', 'skylarkyun': 'sunnywang', 'hjs': 'davidliao', 'davidkiang': 'chriskcli',
-    'shumenglu': 'chriskcli', 'amandagchen': 'chriskcli', 'samuelxyang': 'sunnywang', 'yachenwang': 'sunnywang', 'lilxxu': 'v_lxtoli',
-    'janehou': 'sunnywang', 'apolloyuan': 'v_lxtoli', 'zhidonzhang': 'v_lxtoli', 'meizizhu': 'minghuishi', 'rayning': 'rickiezhong',
-    'jimmyrichen': 'awmzhang', 'devinghou': 'eballchen', 'huayangsong': 'meteorwang', 'kenqczhang': 'awmzhang', 'crosbyli': 'awmzhang',
-    'cathydiao': 'v_lxtoli', 'lenafu': 'eballchen', 'simeonshang': 'v_puxuwu', 'johndlhe': 'awmzhang', 'yizhaoyao': 'awmzhang',
-    'yuyozhang': 'v_dfcao', 'greglliu': 'baozhatang', 'cassyzu': 'eballchen', 'hymanhyhe': 'v_gdyou', 'popeyecai': 'awmzhang',
-    'tszshuli': 'chriskcli', 'victrjtang': 'v_lxtoli', 'yyao': 'v_lxtoli', 'rogerxzhang': 'v_lxtoli', 'leonleicao': 'v_lxtoli',
-    'qianqwwang': 'v_lxtoli', 'daisyanchen': 'awmzhang', 'danshu': 'v_gdyou', 'jerrickgu': 'eballchen', 'belindaliu': 'eballchen',
-    'trancezhang': 'meteorwang', 'yangyshen': 'meteorwang', 'fabzeng': 'meteorwang', 'denielcheng': 'awmzhang', 'adamycyang': 'v_lxtoli',
-    'gavincjpang': 'chriskcli', 'alisaxiao': 'meteorwang', 'mickeyjin': 'eballchen', 'kirozhao': 'baozhatang', 'annielin': 'baozhatang',
-    'sunnyxu': 'baozhatang', 'shadowguo': 'rickiezhong', 'victorwan': 'v_puxuwu', 'deandjzhu': 'v_lxtoli', 'torresxu': 'v_lxtoli',
-    'pengchen': 'davidliao', 'richieyang': 'davidliao', 'jennizheng': 'v_lxtoli', 'davidxu': 'eballchen', 'powellli': 'v_puxuwu',
-    'hunterlong': 'sunnywang', 'candyyguo': 'awmzhang', 'houferchen': 'eballchen', 'louisluo': 'v_puxuwu', 'shanksyang': 'awmzhang',
-    'vigilyang': 'kirajzhang', 'bobsimons': 'sunnywang', 'harisonwang': 'sunnywang', 'markmowang': 'v_gdyou', 'leofluo': 'rickiezhong',
-    'solinqiu': 'eballchen', 'richardyu': 'meteorwang', 'cindywu': 'eballchen', 'lilinwang': 'chriskcli', 'chaoteng': 'sunnywang',
-    'batiliu': 'rickiezhong'
-  };
-
-  function getSpecialistRTX(userName) {
-    const rtx = (userName || '').toLowerCase().trim();
-    return vipSpecialistMap[rtx] || 'patfootliu';
-  }
-
-  // ========== Webhook ==========
-  const WEBHOOK_URL = 'https://1257899736-cuc4ne0i3f.ap-guangzhou.tencentscf.com';
-
-  async function submitForm() {
-    var services = [...document.querySelectorAll('.svc-item input:checked')].map(function(cb){return cb.value;});
-    if (!services.length) return showToast('请至少选择一项服务');
-    var name = document.getElementById('userName').value.trim();
-    var country = document.getElementById('country').value;
-    var city = document.getElementById('city').value;
-    var start = document.getElementById('startDate').value;
-    var end = document.getElementById('endDate').value;
-    var transit = document.querySelector('input[name="transit"]:checked');
-    var remark = document.getElementById('remark').value.trim();
-    if (!name||!country||!city||!start||!end||!transit) return showToast('请填写所有必填项');
-
-    var destination = city ? country+'\u00B7'+city : country;
-    var payload = {name,destination,country,city,start,end,
-      transit:transit.value,remark,services,
-      time:new Date().toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})};
-    var specialistRTX = getSpecialistRTX(name);
-    var msg = buildWeComMsg(payload,[specialistRTX]);
-    try {
-      var btn=document.querySelector('.submit-btn');
-      btn.disabled=true;btn.textContent='提 交 中...';
-      var resp=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(msg)});
-      var result=await resp.json();
-      if(result.errcode===0){showToast('提交成功！专员将尽快联系您');resetForm();}
-      else{showToast('提交失败，请稍后重试（错误码：'+result.errcode+'）');btn.disabled=false;btn.textContent='提 交 申 请';}
-    }catch(e){
-      showToast('网络异常，请检查 Webhook 配置');console.error(e);
-      var b=document.querySelector('.submit-btn');b.disabled=false;b.textContent='提 交 申 请';
-    }
-  }
-
-  function buildWeComMsg(p,mList){
-    var txt=p.services.map(function(s){return '\u2022 '+s;}).join('\n');
-    var msg='\u3010境外差旅服务申请\u3011\n\u2501\u2501\n\ud83d\udce6 申请服务：\n'+txt+
-      '\n\u2501\n\ud83d\udc64 申请人：'+p.name+'\n\ud83c\udf0d 目的地：'+p.destination+
-      '\n\ud83d\udcc5 行程：'+p.start+' \uff5e '+p.end+'\n\ud83d\udeeb 香港机场中转：'+p.transit+
-      '\n\ud83d\udcdd 备注：'+(p.remark||'\u65e0')+'\n\u2501\n\ud83d\udd55 时间：'+p.time;
-    var o={msgtype:'text',text:{content:msg}};
-    if(mList&&mList.length>0)o.text.mentioned_list=mList;
-    return o;
-  }
-
-  function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
-
-  function resetForm(){
-    document.querySelectorAll('.svc-item input').forEach(function(c){c.checked=false;c.closest('.svc-item').classList.remove('selected');});
-    document.getElementById('userName').value='';
-    document.getElementById('country').value='';
-    document.getElementById('city').innerHTML='<option value="">请先选择国家/地区</option>';
-    document.getElementById('city').disabled=true;
-    document.getElementById('startDate').value='';
-    document.getElementById('endDate').value='';
-    document.querySelectorAll('input[name="transit"]').forEach(function(r){r.checked=false;});
-    document.getElementById('radio-yes').classList.remove('active');
-    document.getElementById('radio-no').classList.remove('active');
-    document.getElementById('remark').value='';
-    var b=document.querySelector('.submit-btn');b.disabled=false;b.textContent='提 交 申 请';
   }
 </script>
 </body>
